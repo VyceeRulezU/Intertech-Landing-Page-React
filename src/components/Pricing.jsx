@@ -6,7 +6,7 @@ const Pricing = () => {
     const plans = [
         {
             type: "Essential",
-            price: "$49/mo",
+            price: "₦4,900/mo",
             data: "500 mb",
             features: [
                 "Download speeds up to 500 Mbps",
@@ -21,7 +21,7 @@ const Pricing = () => {
         {
             popular: true,
             type: "Performance",
-            price: "$49/mo",
+            price: "₦4,900/mo",
             data: "2 Gbps",
             features: [
                 "Download speeds up to 2 Gbps",
@@ -36,7 +36,7 @@ const Pricing = () => {
         },
         {
             type: "Essential",
-            price: "$149/mo",
+            price: "₦14,900/mo",
             data: "10 Gbps",
             features: [
                 "Download speeds up to 10 Gbps",

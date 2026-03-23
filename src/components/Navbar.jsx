@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/Logo_main.svg';
 
-const Navbar = () => {
+const Navbar = ({ cartCount = 0 }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+    useEffect(() => {
+        // Update path on location changes if using a client-side router
+        setCurrentPath(window.location.pathname);
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -54,6 +60,9 @@ const Navbar = () => {
         }
     };
 
+    // Helper to check active state based on URL or assume '/' is products
+    const isProductsActive = currentPath.includes('product') || currentPath === '/';
+
     return (
         <div className="nav_wrapper">
             {/* Desktop Nav */}
@@ -64,15 +73,17 @@ const Navbar = () => {
 
                 <nav className="nav_links_wrapper">
                     <a className="nav-link" href="#solution">Solution</a>
-                    <a className="nav-link" href="#products">Products</a>
+                    <a className="nav-link" href="#products" style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
                     <a className="nav-link" href="#pricing">Pricing</a>
                     <a className="nav-link" href="#faqs">FAQs</a>
                 </nav>
 
-                <a href="#" className="nav-btn">
-                    Get Started
-                    <span className="material-symbols-outlined">arrow_outward</span>
-                </a>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <a href="#" className="nav-btn" style={{ backgroundColor: 'transparent', color: '#FFFFFF', border: '1px solid #717171' }}>
+                        Cart ({cartCount})
+                        <span className="material-symbols-outlined">shopping_cart</span>
+                    </a>
+                </div>
             </div>
 
             {/* Mobile Nav */}
@@ -103,13 +114,13 @@ const Navbar = () => {
                             </div>
                             <nav className="mobile_nav_links">
                                 <a className="nav-link" href="#solution" onClick={closeMenu}>Solution</a>
-                                <a className="nav-link" href="#products" onClick={closeMenu}>Products</a>
+                                <a className="nav-link" href="#products" onClick={closeMenu} style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
                                 <a className="nav-link" href="#pricing" onClick={closeMenu}>Pricing</a>
                                 <a className="nav-link" href="#faqs" onClick={closeMenu}>FAQs</a>
                             </nav>
-                            <a href="#" className="nav-btn mobile_menu_btn">
-                                Get Started
-                                <span className="material-symbols-outlined">arrow_outward</span>
+                            <a href="#" className="nav-btn mobile_menu_btn" style={{ backgroundColor: 'transparent', color: '#FFFFFF', border: '1px solid #717171' }}>
+                                Cart ({cartCount})
+                                <span className="material-symbols-outlined">shopping_cart</span>
                             </a>
                         </motion.div>
                     )}
