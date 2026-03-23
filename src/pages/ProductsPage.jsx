@@ -29,7 +29,7 @@ const products = [
   },
 ];
 
-const ProductsPage = ({ onAddToCart }) => {
+const ProductsPage = ({ cart, onAddToCart, onRemoveFromCart }) => {
   return (
     <div className="section_wrapper">
       <div className="hero_section">
@@ -51,7 +51,12 @@ const ProductsPage = ({ onAddToCart }) => {
           </div>
         </div>
       </div>
-      <ProductList products={products} onAddToCart={onAddToCart} />
+      <ProductList 
+        products={products} 
+        cart={cart}
+        onAddToCart={onAddToCart} 
+        onRemoveFromCart={onRemoveFromCart}
+      />
       <ShopByCategory />
       <Testimonials />
       <CTA />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductCard = ({ name, price, category, image, onAddToCart }) => {
+const ProductCard = ({ id, name, price, category, image, isInCart, onAddToCart, onRemoveFromCart }) => {
   return (
     <div 
       className="feat-product-card" 
@@ -37,7 +37,29 @@ const ProductCard = ({ name, price, category, image, onAddToCart }) => {
       <h3 style={{ fontSize: '1.5rem', color: '#FFFFFF', fontWeight: '300', margin: '0 0 0.5rem 0' }}>{name}</h3>
       <p style={{ fontSize: '1.2rem', color: '#6195FE', fontWeight: '300', margin: 0 }}>₦ {Number(price).toFixed(2)}</p>
       
-      <div style={{ width: '100%', marginTop: '1rem' }}>
+      <div style={{ width: '100%', marginTop: '1.5rem', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+        <button 
+          className="hero_btn secondary_btn"
+          onClick={(e) => {
+            e.preventDefault();
+            onRemoveFromCart();
+          }}
+          style={{ 
+            flex: 1,
+            justifyContent: 'center', 
+            padding: '0.8rem 0.5rem',
+            fontSize: '0.9rem',
+            borderRadius: '0.6rem',
+            border: '1px solid #717171',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.3rem'
+          }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>do_not_disturb_on</span>
+          Remove
+        </button>
+
         <button 
           className="hero_btn primary_btn"
           onClick={(e) => {
@@ -45,18 +67,23 @@ const ProductCard = ({ name, price, category, image, onAddToCart }) => {
             onAddToCart();
           }}
           style={{ 
-            width: '100%', 
+            flex: 1,
             justifyContent: 'center', 
-            padding: '1rem',
-            fontSize: '1rem',
+            padding: '0.8rem 0.5rem',
+            fontSize: '0.9rem',
             borderRadius: '0.6rem',
-            border: 'none'
+            border: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.3rem'
           }}
         >
-          Add to Cart
-          <span className="material-symbols-outlined" style={{ fontSize: '1.2rem', marginLeft: '0.5rem' }}>add_shopping_cart</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>add_circle</span>
+          Add
         </button>
+
       </div>
+      
     </div>
   );
 };

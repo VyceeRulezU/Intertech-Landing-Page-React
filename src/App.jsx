@@ -6,19 +6,40 @@ import ProductsPage from './pages/ProductsPage';
 import './App.css'; // Global css
 
 function App() {
-  const [cartCount, setCartCount] = useState(0);
+  const [cart, setCart] = useState([]);
 
-  const handleAddToCart = () => {
-    setCartCount(prev => prev + 1);
+  const handleAddToCart = (product) => {
+    setCart(prev => [...prev, product]);
+  };
+
+  const handleRemoveFromCart = (productId) => {
+    setCart(prev => {
+      const index = prev.findIndex(item => item.id === productId);
+      if (index > -1) {
+        const newCart = [...prev];
+        newCart.splice(index, 1);
+        return newCart;
+      }
+      return prev;
+    });
   };
 
   return (
     <Router>
       <div className="body_wrapper">
-        <Navbar cartCount={cartCount} />
+        <Navbar cartCount={cart.length} />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage onAddToCart={handleAddToCart} />} />
+          <Route 
+            path="/products" 
+            element={
+              <ProductsPage 
+                cart={cart} 
+                onAddToCart={handleAddToCart} 
+                onRemoveFromCart={handleRemoveFromCart} 
+              />
+            } 
+          />
         </Routes>
       </div>
     </Router>

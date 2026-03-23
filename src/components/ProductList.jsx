@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 
-const ProductList = ({ products, onAddToCart }) => {
+const ProductList = ({ products, cart, onAddToCart, onRemoveFromCart }) => {
   return (
     <div className="feat-product-section" style={{ maxWidth: '1200px', margin: '4rem auto', padding: '0 2rem' }}>
       
@@ -20,7 +20,9 @@ const ProductList = ({ products, onAddToCart }) => {
             price={product.price}
             category={product.category}
             image={product.image}
-            onAddToCart={() => onAddToCart()}
+            isInCart={cart.some(item => item.id === product.id)}
+            onAddToCart={() => onAddToCart(product)}
+            onRemoveFromCart={() => onRemoveFromCart(product.id)}
           />
         ))}
       </div>
