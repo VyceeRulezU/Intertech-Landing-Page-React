@@ -60,8 +60,8 @@ const Navbar = ({ cartCount = 0 }) => {
         }
     };
 
-    // Helper to check active state based on URL or assume '/' is products
-    const isProductsActive = currentPath.includes('product') || currentPath === '/';
+    // Helper to check active state based on URL
+    const isProductsActive = currentPath.includes('product');
 
     return (
         <div className="nav_wrapper">
@@ -72,10 +72,10 @@ const Navbar = ({ cartCount = 0 }) => {
                 </div>
 
                 <nav className="nav_links_wrapper">
-                    <a className="nav-link" href="#solution">Solution</a>
-                    <a className="nav-link" href="#products" style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
-                    <a className="nav-link" href="#pricing">Pricing</a>
-                    <a className="nav-link" href="#faqs">FAQs</a>
+                    <a className="nav-link" href="/">Solution</a>
+                    <a className="nav-link" href="/products" style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
+                    <a className="nav-link" href="/#pricing">Pricing</a>
+                    <a className="nav-link" href="/#faqs">FAQs</a>
                 </nav>
 
                 <div style={{ display: 'flex', gap: '1rem' }}>
@@ -113,10 +113,10 @@ const Navbar = ({ cartCount = 0 }) => {
                                 <span className="material-symbols-outlined">close</span>
                             </div>
                             <nav className="mobile_nav_links">
-                                <a className="nav-link" href="#solution" onClick={closeMenu}>Solution</a>
-                                <a className="nav-link" href="#products" onClick={closeMenu} style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
-                                <a className="nav-link" href="#pricing" onClick={closeMenu}>Pricing</a>
-                                <a className="nav-link" href="#faqs" onClick={closeMenu}>FAQs</a>
+                                <a className="nav-link" href="/" onClick={closeMenu}>Solution</a>
+                                <a className="nav-link" href="/products" onClick={closeMenu} style={isProductsActive ? { color: '#6195FE', fontWeight: 'bold' } : {}}>Products</a>
+                                <a className="nav-link" href="/#pricing" onClick={closeMenu}>Pricing</a>
+                                <a className="nav-link" href="/#faqs" onClick={closeMenu}>FAQs</a>
                             </nav>
                             <a href="#" className="nav-btn mobile_menu_btn" style={{ backgroundColor: 'transparent', color: '#FFFFFF', border: '1px solid #717171' }}>
                                 Cart ({cartCount})
