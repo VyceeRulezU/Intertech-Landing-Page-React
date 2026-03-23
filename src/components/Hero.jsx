@@ -1,44 +1,89 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import globeVideo from '../assets/digital-globe.mp4';
+import starIcon from '../assets/star_22.svg';
+import avatarGroup from '../assets/avatar-group.svg';
 
 const Hero = () => {
-  return (
-    <div style={{
-      display: 'flex',
-      backgroundColor: '#0C1C40', // A dark blue matching the legacy theme card borders
-      borderRadius: '1.8rem',
-      padding: '4rem',
-      marginTop: '10rem',
-      margin: '2rem auto',
-      maxWidth: '1200px',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: '2rem'
-    }}>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'flex-start' }}>
-        <h1 style={{ fontSize: '3rem', fontWeight: '300', color: '#FFFFFF', lineHeight: '1.2' }}>
-          Elevate Your Audio Journey
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: '#C4D7FF', lineHeight: '1.5' }}>
-          Experience Sound In Its Purest Form. Our premium audio equipment brings studio-quality precision to your everyday listening.
-        </p>
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-          <a href="#" className="hero_btn primary_btn" style={{ padding: '1rem 2rem', borderRadius: '0.6rem' }}>
-            Shop Now
-          </a>
-          <a href="#" className="hero_btn secondary_btn" style={{ padding: '1rem 2rem', borderRadius: '0.6rem' }}>
-            Learn More
-          </a>
-        </div>
-      </div>
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-        <img 
-          src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=800&auto=format&fit=crop" 
-          alt="Person listening to headphones" 
-          style={{ width: '100%', maxWidth: '400px', borderRadius: '1.5rem', objectFit: 'cover' }}
-        />
-      </div>
-    </div>
-  );
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { y: 30, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 20
+            }
+        }
+    };
+
+    return (
+        <section className="hero_section">
+            <motion.div 
+                className="section_content_wrapper"
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+            >
+                <div className="hero_header">
+                    <motion.div className="hero_chip" variants={itemVariants}>
+                        <span className="new">New</span>
+                        <p className="chip_txt">Introducing 10 Gbps plans — Experience the fastest fiber in the nation</p>
+                        <span className="material-symbols-outlined blue_arrow">arrow_outward</span>
+                    </motion.div>
+
+                    <motion.h1 variants={itemVariants}>
+                        Lightning-fast Internet for the Modern World.
+                    </motion.h1>
+
+                    <motion.p className="hero_sum" variants={itemVariants}>
+                        Experience ultra-reliable fiber connectivity with speeds up to 10Gbps. Stream, game, and work without limits.
+                    </motion.p>
+
+                    <motion.div className="sub_users" variants={itemVariants}>
+                        <img src={avatarGroup} alt="Subscribers" />
+                        <p>Over 500 Subscribers</p>
+                    </motion.div>
+
+                    <motion.div className="hero_btns_wrapper" variants={itemVariants}>
+                        <a href="#" className="hero_btn primary_btn">
+                            Check Availability
+                            <span className="material-symbols-outlined">arrow_outward</span>
+                        </a>
+                        <a href="#" className="hero_btn secondary_btn">
+                            Learn More
+                            <span className="material-symbols-outlined">arrow_outward</span>
+                        </a>
+                    </motion.div>
+                </div>
+            </motion.div>
+
+            <video className="hero_gif" autoPlay muted loop playsInline>
+                <source src={globeVideo} type="video/mp4" />
+            </video>
+
+            <motion.div 
+                className="star"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.85, scale: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <img src={starIcon} alt="Star" />
+            </motion.div>
+        </section>
+    );
 };
 
 export default Hero;
